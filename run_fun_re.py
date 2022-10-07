@@ -7,10 +7,10 @@ import sys
 
 import numpy as np
 from datasets import ClassLabel, load_dataset
-import layoutlmft
+import src
 import src.data.datasets.funsd
 import transformers
-from layoutlmft import AutoModelForRelationExtraction
+from src import AutoModelForRelationExtraction
 from src.data.data_args import FUNDataTrainingArguments
 from src.data.data_collator import DataCollatorForKeyValueExtraction
 from src.evaluation import re_score
@@ -81,8 +81,7 @@ def main():
     # Set seed before initializing model.
     set_seed(training_args.seed)
     datasets = load_dataset(
-        os.path.abspath(layoutlmft.data.datasets.funsd.__file__),
-        f"funsd.{data_args.lang}",
+        os.path.abspath(src.data.datasets.funsd.__file__),
         additional_langs=data_args.additional_langs,
         keep_in_memory=True,
     )
